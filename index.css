@@ -1,0 +1,702 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Josefin+Sans:wght@400;700&display=swap');
+:root {
+    --main-color: #cc98e6;
+    --mainShaddow-color: #d286f9;
+    --second-color: #c284e1;
+    --third-color: #3d1452;
+    --fourth-color: #5c1e7b;
+    --green-color: #99d75b;
+    --red-color: #ff4000;
+    --white-color: #fff;
+    --font-size1: 24px;
+    --font-size2: 20px;
+    --main-padding: 20px;
+    --second-padding: 10px;
+    --meddium-padding: 15px;
+    --third-padding: 5px;
+    --large-padding: 35px;
+    --main-font-cursive: 'Dancing Script', cursive;
+    --main-font: 'Josefin Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    background: #f5f5f5;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: var(--main-color);
+    transition: left 0.19s;
+}
+
+.navigation.active {
+    left: -100%;
+}
+
+.navigation .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    padding: var(--main-padding);
+    font-size: 2.5em;
+    color: var(--white-color);
+    font-family: var(--main-font-cursive);
+    line-height: 14px;
+    box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav_links {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+}
+
+.nav_link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--main-padding);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.nav_link.active {
+    background: var(--second-color)
+}
+
+.nav_link.active:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.link_text {
+    font-size: 1.3em;
+    color: var(--white-color);
+    font-family: var(--main-font);
+}
+
+.link_icon {
+    font-size: 1.6em;
+    color: var(--white-color);
+}
+
+.nav_link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    min-width: 100vh;
+    left: 300px;
+    transition: 0.5s, width 0.2s, left 0.2s;
+}
+
+.main.active {
+    width: 100%;
+    left: 0;
+}
+
+.main_top_bar {
+    width: 100%;
+    background: var(--white-color);
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top_bar_toggle, .top_bar_icon {
+    font-size: 2em;
+    padding: var(--main-padding);
+    color: var(--third-color);
+    transition: transform 0.2s;
+}
+
+.top_bar_icon {
+    cursor: grabbing;
+}
+
+.top_bar_icon:hover {
+    animation: rotate_icon 1s infinite;
+}
+
+#menuButton:hover {
+    color: var(--main-color);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.top_bar_reference {
+    padding: var(--main-padding);
+    font-size: 2em;
+    font-family: var(--main-font);
+    color: var(--second-color);
+}
+
+/* CENTRO DE CONTROLE*/
+
+.card_box_days, .card_box_controle {
+    position: relative;
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    font-family: var(--main-font);
+}
+
+.card_day {
+    background: var(--white-color);
+    padding: var(--main-padding);
+    border-radius: 30px;
+    border: 0.5px solid var(--main-color);
+    cursor: pointer;
+    min-height: 193.8px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.card_day:hover {
+    border: 0;
+    box-shadow: 0 2px 5px var(--second-color);
+}
+
+.card_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6em;
+    padding: var(--second-padding);
+    padding-top: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #5c1e7b;
+}
+
+.card_content--paciente, .card_pacientes_info-infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1em;
+    border-radius: 10px;
+    padding: var(--second-padding);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: box-shadow 0.2s;
+}
+
+.card_content--paciente:hover {
+    box-shadow: 0 1px 4px #5c1e7b;
+}
+
+.card_content--paciente:nth-child(3), .card_pacientes_info-infos:nth-child(3) {
+    border-bottom: 0;
+}
+
+.line {
+    background: var(--third-color);
+    height: 0.5px;
+    margin: 15px 30px;
+}
+
+.card_day:hover .line {
+    margin: 15.5px 30px;
+}
+
+.card_pacientes_info, .card_horas_info, .card_financeiro_info {
+    background: var(--white-color);
+    padding: var(--main-padding);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.card_pacientes_info {
+    border: 0.5px solid #cd32a6;
+}
+
+.card_horas_info {
+    border: 0.5px solid #46d2d2;
+}
+
+.card_financeiro_info {
+    border: 0.5px solid #99d75b;
+}
+
+.card_financeiro_info:hover {
+    border: 0;
+    box-shadow: 0 2px 5px #99d75b;
+}
+
+.card_horas_info:hover {
+    border: 0;
+    box-shadow: 0 2px 5px #46d2d2;
+}
+
+.card_pacientes_info:hover {
+    border: 0;
+    box-shadow: 0 2px 5px #cd32a6;
+}
+
+.info_text {
+    display: flex;
+    align-items: center;
+}
+
+.info_text .info_icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.1em;
+    padding: 0 var(--second-padding);
+    padding-bottom: 5px;
+}
+
+.card_horas_info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1em;
+}
+
+.info_table {
+    width: 100%;
+}
+
+.info_table thead td {
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: var(--main-padding);
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.info_table thead td:nth-child(2) {
+    border-right: 1px solid #f5f5f5;
+}
+
+.info_table tbody td {
+    border-bottom: 1px solid #f5f5f5;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+.info_table tbody tr td:nth-child(1) {
+    border-bottom: 1px solid #f5f5f5;
+    text-align: left;
+}
+
+.info_table tbody tr td:nth-child(2) {
+    border-right: 1px solid #f5f5f5;
+}
+
+.info_table tbody tr:nth-child(2) td {
+    border-bottom: 0;
+    color: #73b92d;
+}
+
+.info_table tbody tr:nth-child(2) td:nth-child(1) {
+    border-bottom: 0;
+    color: #000;
+}
+
+.info_number-financeiro {
+    color: #73b92d;
+}
+
+.info_number-atrasado {
+    color: #d75b5b;
+}
+
+.semana_mes_container {
+    position: relative;
+    margin: 30px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+    font-family: var(--main-font);
+}
+
+.semana, .calendar {
+    background: var(--white-color);
+    padding: var(--main-padding);
+    border-radius: 30px;
+}
+
+.semana {
+    border: 0.5px solid var(--main-color);
+}
+
+.semana_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    padding: var(--second-padding);
+    width: 100%;
+    margin-bottom: 10px;
+    color: #5c1e7b;
+}
+
+.semana_header_text {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s, text-shadow 0.2s;
+}
+
+.semana_header_icon {
+    padding: 0 var(--second-padding);
+}
+
+.semana_header_text:hover {
+    text-shadow: 0 -1px 2px var(--second-color);
+    transform: scale(1.03);
+}
+
+.semana_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.dia_semana {
+    background: var(--white-color);
+    padding: var(--main-padding);
+    border-radius: 30px;
+    border: 0.5px solid var(--main-color);
+    cursor: pointer;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.dia_semana_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    font-weight: bold;
+    padding: var(--second-padding);
+    padding-top: 0;
+    width: 100%;
+    margin-bottom: 10px;
+    color: #5c1e7b;
+}
+
+.dia_semana_card_content-paciente {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+    padding: var(--second-padding);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.dia_semana:hover {
+    border: 0;
+    box-shadow: 0 2px 5px var(--second-color);
+}
+
+.dia_semana_card_content-paciente:nth-child(3) {
+    border-bottom: 0;
+}
+
+.info_day {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9em;
+    padding: var(--second-padding);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+/* -----                 chnages -- */
+
+.accordion__paciente {
+    position: relative;
+    margin: 30px;
+    background: var(--white-color);
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0.5px solid var(--main-color);
+}
+
+.accordion__paciente:hover {
+    border: 0;
+    box-shadow: 0 2px 5px var(--second-color);
+}
+
+.accordion__paciente.active:hover {
+    border: 0.5px solid var(--main-color);
+    box-shadow: none;
+}
+
+.box__paciente__header {
+    display: flex;
+    padding: var(--main-padding);
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+    font-family: var(--main-font);
+    font-size: var(--font-size1);
+    transition: margin-bottom 0.2s ease-out;
+    overflow: hidden;
+}
+
+.box__paciente__header.active .box_paciente_left_right .material-icons {
+    transition: transform 0.2s;
+}
+
+.box__paciente__header.active .box_paciente_left_right .material-icons {
+    transition: transform 0.2s;
+    transform: rotate(180deg);
+}
+
+.box_paciente_left_side, .box_paciente_center, .box_paciente_left_right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.box_paciente_center span {
+    margin: 0 20px;
+}
+
+.paciente_img {
+    position: relative;
+    min-height: 50px;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 30px;
+}
+
+.paciente_img img {
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.ativo_inativo {
+    background: var(--green-color);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.ativo_inativo.inativo {
+    background: var(--red-color);
+}
+
+.ativo_inativo_text {
+    color: var(--green-color);
+}
+
+.ativo_inativo_text.inativo {
+    color: var(--red-color);
+}
+
+.box__paciente_body {
+    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.box__paciente_body_content {
+    padding: var(--main-padding);
+    line-height: 1.5rem;
+    border-image: linear-gradient(to right, transparent, var(--third-color), transparent) 1;
+}
+
+.add_new_paciente_content {
+    position: fixed;
+    display: flex;
+    font-family: var(--main-font);
+    align-items: center;
+    justify-content: space-between;
+    bottom: -1px;
+    left: 35px;
+    border-radius: 30px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: var(--fourth-color);
+    color: var(--white-color);
+    padding: var(--main-padding);
+    cursor: pointer;
+    box-shadow: -5px 0px 7px var(--second-color);
+    transition: background 0.3s, left 0.4s;
+    font-size: 1.2em;
+}
+
+.add_new_paciente_content:hover {
+    background: var(--third-color);
+}
+
+.add_new_paciente_content .add_text {
+    margin-right: 10px;
+}
+
+.add_new_paciente_content .add_icon {
+    font-size: 1em;
+    padding-bottom: 2px;
+}
+
+.add_new_paciente_content .open_with{
+    margin-left: 10px;
+    font-size: 1em;
+    padding-bottom: 2px;
+    transition: transform 0.2s;
+}
+
+.add_new_paciente_content .open_with:hover {
+    transform: scale(1.2);
+}
+
+.add_new_paciente_content .open_with_left_side {
+    margin-right: 10px;
+    font-size: 1em;
+    padding-bottom: 2px;
+    transform: rotate(180deg);
+    display: none;
+}
+
+.add_new_paciente_content .open_with_left_side:hover {
+    transform: scale(1.2) rotate(180deg);
+}
+
+.box__paciente_body_content {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    font-family: var(--main-font);
+}
+
+.info_pessoais, .info_consultas, .info_financeiras {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-radius: 30px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    padding: var(--third-padding) var(--main-padding);
+}
+
+.info_pessoais {
+    background-image: linear-gradient(var(--white-color), #f5eafa);
+    box-shadow: 0 4px 5px #f5d6ed;
+}
+
+.info_consultas {
+    background-image: linear-gradient(var(--white-color), #f5d6ed);
+    box-shadow: 0 4px 5px #f5eafa;
+}
+
+.info_financeiras {
+    background-image: linear-gradient(var(--white-color), #f2faea);
+    box-shadow: 0 4px 5px #f5eafa;
+}
+
+.info_pessoais .info_header {
+    color: #7d27a5;
+}
+
+.info_consultas .info_header {
+    color: #a42885;
+}
+
+.info_financeiras .info_header {
+    color: #66a527;
+}
+
+.info_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: var(--font-size2);
+    padding: var(--main-padding) 0 5px 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.info_consultas .info_container {
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.info_pessoais .info_container:nth-child(4), .info_financeiras .info_container:nth-child(4), .info_consultas .info_container:nth-child(4) {
+    border-bottom: 0;
+}
+
+.box__paciente_body_footer {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: var(--white-color);
+    padding: var(--second-padding) var(--main-padding);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    bottom: -70px;
+    right: -1px;
+    border: 0.5px solid var(--main-color);
+    border-top: 0;
+}
+
+.btn_bx_paciente_footer-ver-mais, .btn_bx_paciente_footer-iniciar-consulta {
+    padding: var(--meddium-padding) var(--main-padding);
+    background-color: var(--second-color);
+    color: var(--white-color);
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-family: var(--main-font);
+    box-shadow: 0 2px 5px var(--second-color);
+    cursor: pointer;
+}
+
+.btn_bx_paciente_footer-ver-mais:hover, .btn_bx_paciente_footer-iniciar-consulta:hover {
+    background: var(--mainShaddow-color);
+}
+
+.btn_bx_paciente_footer-ver-mais {
+    margin-right: 20px;
+}
+
+@keyframes rotate_icon {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
