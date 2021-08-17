@@ -1,3 +1,4 @@
+import MaisCampos from "./MaisCampos.js";
 export default {
     open() {
         const html = `  
@@ -102,7 +103,7 @@ export default {
                                         </div>
                                     </div>
                                 <div class="novo_paciente_windown_form_footer">
-                                    <button id="fichaCompleta">Ficha Completa</button>
+                                    <button id="add_campo">Adicionar Campo</button>
                                     <button type="submit">Finalizar</button>
                                 </div>
                                 </form>
@@ -112,11 +113,16 @@ export default {
                 `;
 
         const template = document.createElement("template");
-
         template.innerHTML = html;
+      
         const windownContainer = template.content.querySelector(".novo_paciente_windown_container");
         const btnClose = template.content.querySelector(".novo_paciente_windown_header--btn_close");
+        const btnAddCampo = template.content.querySelector("#add_campo");
 
+        btnAddCampo.addEventListener('click', e => {
+            e.preventDefault();
+            MaisCampos.open();
+        });
         btnClose.addEventListener('click', () => {
             this._close(windownContainer);
         });
@@ -131,5 +137,9 @@ export default {
             document.body.removeChild(windownContainer)
             document.body.classList.remove('stop-scrolling')
         })
+    },
+
+    _moreFields(element) {
+
     }
 }
