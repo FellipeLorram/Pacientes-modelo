@@ -7,6 +7,8 @@
     --fourth-color: #5c1e7b;
     --green-color: #99d75b;
     --red-color: #ff4000;
+    --yellow-color: #99b3ff;
+    --darkerYellow-color: #668cff;
     --white-color: #fff;
     --font-size1: 24px;
     --font-size2: 20px;
@@ -23,11 +25,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
     overflow-x: hidden;
     background: #f5f5f5;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.stop-scrolling {
+    height: 100%;
+    overflow: hidden;
+}
+
+.espacamento {
+    display: none;
 }
 
 .container {
@@ -122,6 +140,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: top 0.3s;
 }
 
 .top_bar_toggle, .top_bar_icon {
@@ -158,9 +177,10 @@ body {
     position: relative;
     margin: 30px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 15px;
     font-family: var(--main-font);
+    padding: 0 10px;
 }
 
 .card_day {
@@ -171,6 +191,7 @@ body {
     cursor: pointer;
     min-height: 193.8px;
     transition: border 0.2s, box-shadow 0.2s;
+    min-width: 230px;
 }
 
 .card_day:hover {
@@ -190,7 +211,7 @@ body {
     color: #5c1e7b;
 }
 
-.card_content--paciente, .card_pacientes_info-infos {
+.card_content--paciente, .card_pacientes_info-infos, .lembrete_container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -221,12 +242,17 @@ body {
     margin: 15.5px 30px;
 }
 
-.card_pacientes_info, .card_horas_info, .card_financeiro_info {
+.card_pacientes_info, .card_horas_info, .card_financeiro_info, .card_lembretes {
     background: var(--white-color);
     padding: var(--main-padding);
     border-radius: 30px;
     cursor: pointer;
     transition: border 0.2s, box-shadow 0.2s;
+    min-width: 230px;
+}
+
+.card_lembretes {
+    border: 0.5px solid var(--darkerYellow-color);
 }
 
 .card_pacientes_info {
@@ -246,6 +272,11 @@ body {
     box-shadow: 0 2px 5px #99d75b;
 }
 
+.card_lembretes:hover {
+    border: 0;
+    box-shadow: 0 2px 5px var(--yellow-color);
+}
+
 .card_horas_info:hover {
     border: 0;
     box-shadow: 0 2px 5px #46d2d2;
@@ -254,6 +285,39 @@ body {
 .card_pacientes_info:hover {
     border: 0;
     box-shadow: 0 2px 5px #cd32a6;
+}
+
+.card_lembretes_header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.card_lembretes_header .material-icons {
+    display: none;
+}
+
+.card_lembretes_header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    padding: var(--second-padding);
+    color: var(--white-color);
+    box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+    margin-left: 10px;
+    display: none;
+}
+
+.card_lembretes_header-text {
+    font-size: 1.4em;
+}
+
+.card_lembretes_content .lembrete_container:nth-child(3) {
+    border-bottom: 0;
 }
 
 .info_text {
@@ -374,7 +438,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
+    gap: 20px;
 }
 
 .dia_semana {
@@ -391,7 +455,6 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1em;
-    font-weight: bold;
     padding: var(--second-padding);
     padding-top: 0;
     width: 100%;
@@ -415,11 +478,7 @@ body {
     box-shadow: 0 2px 5px var(--second-color);
 }
 
-.dia_semana_card_content-paciente:nth-child(3) {
-    border-bottom: 0;
-}
-
-.info_day {
+.info_day, .dia_semana_card_content-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -428,6 +487,10 @@ body {
     padding-bottom: 5px;
     margin-bottom: 15px;
     border-bottom: 1px solid #f5f5f5;
+}
+
+.dia_semana_card_content-paciente:nth-child(3), .dia_semana_content .dia_semana_card_content-info:nth-child(3) {
+    border-bottom: 0;
 }
 
 /* -----                 chnages -- */
@@ -479,7 +542,7 @@ body {
     justify-content: space-between;
 }
 
-.box_paciente_center span {
+#box_paciente_center-first span {
     margin: 0 20px;
 }
 
@@ -521,6 +584,7 @@ body {
 
 .ativo_inativo_text.inativo {
     color: var(--red-color);
+    font-size: var(--font-size2);
 }
 
 .box__paciente_body {
@@ -536,7 +600,7 @@ body {
     border-image: linear-gradient(to right, transparent, var(--third-color), transparent) 1;
 }
 
-.add_new_paciente_content {
+.add_new_paciente_content, .add_new_note_content {
     position: fixed;
     display: flex;
     font-family: var(--main-font);
@@ -547,8 +611,6 @@ body {
     border-radius: 30px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    background: var(--fourth-color);
-    color: var(--white-color);
     padding: var(--main-padding);
     cursor: pointer;
     box-shadow: -5px 0px 7px var(--second-color);
@@ -556,31 +618,45 @@ body {
     font-size: 1.2em;
 }
 
+.add_new_note_content {
+    background: var(--yellow-color);
+    color: var(--fourth-color);
+}
+
+.add_new_paciente_content {
+    background: var(--fourth-color);
+    color: var(--white-color);
+}
+
+.add_new_note_content:hover {
+    background: var(--darkerYellow-color);
+}
+
 .add_new_paciente_content:hover {
     background: var(--third-color);
 }
 
-.add_new_paciente_content .add_text {
+.add_new_paciente_content .add_text, .add_new_note_content .add_text {
     margin-right: 10px;
 }
 
-.add_new_paciente_content .add_icon {
+.add_new_paciente_content .add_icon, .add_new_note_content .add_icon {
     font-size: 1em;
     padding-bottom: 2px;
 }
 
-.add_new_paciente_content .open_with{
+.add_new_paciente_content .open_with, .add_new_note_content .open_with {
     margin-left: 10px;
     font-size: 1em;
     padding-bottom: 2px;
     transition: transform 0.2s;
 }
 
-.add_new_paciente_content .open_with:hover {
+.add_new_paciente_content .open_with:hover, .add_new_note_content .open_with:hover {
     transform: scale(1.2);
 }
 
-.add_new_paciente_content .open_with_left_side {
+.add_new_paciente_content .open_with_left_side, .add_new_note_content .open_with_left_side {
     margin-right: 10px;
     font-size: 1em;
     padding-bottom: 2px;
@@ -588,7 +664,7 @@ body {
     display: none;
 }
 
-.add_new_paciente_content .open_with_left_side:hover {
+.add_new_paciente_content .open_with_left_side:hover, .add_new_note_content .open_with_left_side:hover {
     transform: scale(1.2) rotate(180deg);
 }
 
@@ -692,11 +768,688 @@ body {
     margin-right: 20px;
 }
 
+/*  ================================ MEUS HORARIOS ==========================*/
+
+/*  ================================ MEUS HORARIOS ==========================*/
+
+/*  ================================ MEUS HORARIOS ==========================*/
+
+.minha_agenda_container {
+    position: relative;
+    margin: 30px;
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    font-family: var(--main-font);
+    border: 0.5px solid var(--main-color);
+    border-radius: 30px;
+}
+
+.horas_container {
+    display: grid;
+    grid-template-rows: repeat(16, 1fr);
+    background: var(--white-color);
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.dias_container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background: var(--white-color);
+    border-bottom-right-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.dia {
+    display: grid;
+    grid-template-rows: repeat(16, 1fr);
+}
+
+.hora, .hora_header, .dia_header, .paciente_horario, .dia_footer, .hora_footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--meddium-padding);
+}
+
+.hora, .paciente_horario {
+    border-bottom: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
+.horas_container .hora:nth-child(15), .dia .paciente_horario:nth-child(15) {
+    border-bottom: 0;
+}
+
+.dias_container .dia:nth-child(6) .dia_header {
+    border-top-right-radius: 30px;
+}
+
+.dias_container .dia:nth-child(6) .dia_footer {
+    border-bottom-right-radius: 30px;
+}
+
+.dias_container .dia:nth-child(6) .paciente_horario {
+    border-right: 0;
+}
+
+.paciente_horario:hover {
+    cursor: pointer;
+    box-shadow: 0 2px 5px var(--main-color);
+}
+
+.hora_header, .dia_header, .dia_footer, .hora_footer {
+    color: var(--white-color);
+    background: var(--fourth-color);
+    border-right: 1px solid var(--main-color);
+}
+
+.hora_header {
+    border-top-left-radius: 30px;
+}
+
+.hora_footer {
+    border-bottom-left-radius: 30px;
+}
+
+/* NOVO PACIENTE WINDOWN*/
+
+.novo_paciente_windown_container {
+    font-family: var(--main-font);
+    z-index: 20000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0, 0.6);
+    padding: 10px;
+    box-sizing: border-box;
+    opacity: 0;
+    animation-name: nice_appear;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.confirm-close {
+    animation-name: confirmClose;
+}
+
+.novo_paciente_windown {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 100vh;
+    padding: 20px 0;
+    opacity: 0;
+    transform: scale(0);
+    animation-name: confirm-window-open;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+.novo_paciente_windown_header {
+    background: var(--white-color);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: var(--font-size1);
+    background: var(--fourth-color);
+    color: var(--white-color);
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.novo_paciente_windown_header--btn_close {
+    transition: color 0.2s, transform 0.2s;
+}
+
+.novo_paciente_windown_header--btn_close:hover {
+    color: var(--red-color);
+    cursor: pointer;
+    transform: scale(1.3);
+}
+
+.novo_paciente_windown_body {
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-color);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: inset 1px 1px 5px var(--main-color), inset -1px -1px 5px var(--main-color);
+}
+
+.novo_paciente_windown_body form {
+    width: 100%;
+}
+
+.novo_paciente_windown_body select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+}
+
+.novo_paciente_windown_body input, .novo_paciente_windown_body select {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid var(--main-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border-radius: 5px;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-top: 5px;
+}
+
+.input_container {
+    margin-bottom: 50px;
+}
+
+.novo_paciente_windown_body label {
+    font-size: 17px;
+}
+
+.novo_paciente_windown_body input:focus {
+    border: 0.5px solid var(--fourth-color);
+}
+
+.novo_paciente_windown_body input:focus-visible {
+    border: 1px solid var(--fourth-color);
+    box-shadow: 1px 1px 5px var(--mainShaddow-color);
+}
+
+.novo_paciente_windown_body .container__3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.novo_paciente_windown_body .container__2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.novo_paciente_windown_body .container__4-first_small {
+    display: grid;
+    grid-template-columns: 0.5fr repeat(3, 1fr);
+    gap: 25px;
+}
+
+.novo_paciente_windown_form_footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.novo_paciente_windown_form_footer button {
+    padding: 15px 20px;
+    font-size: 17px;
+    font-family: var(--main-font);
+    background: var(--fourth-color);
+    color: var(--white-color);
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+.novo_paciente_windown_form_footer button:hover {
+    box-shadow: 0 3px 5px var(--main-color);
+    background: rgba(92, 30, 123, 0.8);
+}
+
+/* add_new_paciente_content_mobile */
+
+/* add_new_paciente_content_mobile */
+
+/* add_new_paciente_content_mobile */
+
+.add_new_paciente_content_mobile {
+    padding: 10px 20px 10px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--fourth-color);
+    color: var(--white-color);
+    position: fixed;
+    bottom: 20%;
+    border-radius: 30px;
+    right: -172px;
+    min-width: 204.475px;
+    max-width: 204.475px;
+    font-family: var(--main-font);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.add_new_paciente_content_mobile.active {
+    right: -26px;
+}
+.add_new_paciente_content_mobile.desactive {
+    right: -225px;
+}
+.add_new_paciente_mobile_icon{
+    transition: all 0.3s;
+}
+.add_new_paciente_mobile_text {
+    margin: 0 10px 0 5px;
+}
+
+.icon_rotate {
+    transform: rotate(45deg) scale(1.2);
+}
+
+/* RESPONSIVE */
+
+.navigation_mobile {
+    display: none;
+    transition: all 0.3s;
+}
+
+@media (max-width:800px) {
+    .navbar .bx-menu {
+        display: block;
+    }
+}
+
+@media screen and (max-width:868px) {
+    /*NOVO PACIENTE WINDOWN*/
+    .novo_paciente_windown_header {
+        padding: 20px 10px;
+    }
+    .novo_paciente_windown_body .container__3 {
+        grid-template-columns: auto;
+        gap: 0;
+    }
+    .novo_paciente_windown_body .container__2 {
+        grid-template-columns: auto;
+        gap: 0;
+    }
+    .novo_paciente_windown_body .container__4-first_small {
+        grid-template-columns: auto;
+        gap: 0;
+    }
+    .input_container {
+        margin-bottom: 30px;
+    }
+    /*NOVO PACIENTE WINDOWN*/
+    .semana_container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .card_horas_info {
+        box-shadow: 0 3px 5px #46d2d2;
+    }
+    .card_pacientes_info {
+        box-shadow: 0 3px 5px #cd32a6;
+    }
+    .card_financeiro_info {
+        box-shadow: 0 3px 5px #99d75b;
+    }
+    .card_lembretes {
+        box-shadow: 0 3px 5px var(--yellow-color);
+    }
+    .card_day {
+        box-shadow: 0 3px 5px var(--second-color);
+    }
+    .novo_paciente_windown_form_footer {
+        justify-content: center;
+        align-items: center;
+    }
+    .novo_paciente_windown_form_footer button {
+        margin: 0;
+    }
+    #fichaCompleta {
+        font-size: 14px;
+        padding: 12px 17px;
+        min-height: 47px;
+        margin-right: 20px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    /* CENTRO CONTROLE ++ */
+    .add_new_paciente_content, .add_new_note_content {
+        display: none;
+    }
+    .main {
+        width: 100%;
+        left: 0;
+        min-width: 100vw;
+    }
+    .main .top_bar_toggle, .main .top_bar_icon {
+        display: none;
+    }
+    .navigation {
+        display: none;
+    }
+    .main_top_bar {
+        justify-content: center;
+    }
+    .add_new_paciente_content_mobile {
+        opacity: 1;
+    }
+    .navigation_mobile {
+        position: fixed;
+        display: block;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 100;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        background-image: linear-gradient( rgba(255, 255, 255, 0), var(--main-color));
+    }
+    .icon_mobile_container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--second-padding);
+    }
+    .icon_mobile_container a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: var(--third-color);
+    }
+    .icon_mobile_container::after {
+        content: '';
+        height: 0;
+        width: 0;
+        position: absolute;
+        background: radial-gradient(circle at 50%, #cc98e6, #fff 60%, #eee 100%, #cc98e6 75%);
+        border-radius: 50%;
+        z-index: -1;
+        transition: height 0.3s, width 0.3s;
+    }
+    .icon_mobile_container.active::after {
+        height: 35px;
+        width: 35px;
+        box-shadow: 1px 1px 5px var(--white-color);
+    }
+    .icon_mobile_container a .link_icon_mobile {
+        font-size: 21px;
+    }
+    .icon_mobile_container.active a .link_icon_mobile {
+        transform: scale(1.3);
+    }
+    .main_top_bar {
+        height: 70px;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+        position: fixed;
+        z-index: 10000;
+    }
+    .top_bar_reference {
+        font-size: 30px;
+    }
+    .semana_container {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+    }
+    .semana {
+        margin-bottom: 55px;
+    }
+    .card_box_days, .card_box_controle {
+        overflow: auto;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        margin: 30px;
+        margin-right: 10px;
+        margin-left: 15px;
+    }
+    .card_box_days {
+        margin-top: 100px;
+    }
+    .minha_agenda_container::-webkit-scrollbar, .card_box_days::-webkit-scrollbar, .card_box_controle::-webkit-scrollbar {
+        display: none;
+    }
+    .card_day, .card_pacientes_info, .card_financeiro_info, .card_horas_info, .card_lembretes {
+        padding: var(--main-padding) var(--second-padding);
+        min-width: 300px;
+        min-height: 214px;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+    .card_pacientes_info, .card_financeiro_info, .card_lembretes {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .card_header {
+        font-size: 24px;
+    }
+    .card_content--paciente {
+        font-size: 2em;
+        padding: var(--main-padding);
+    }
+    .card_lembretes_header .card_lembretes_header-icon, .card_lembretes_header-text {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    .card_lembretes_header {
+        margin-bottom: 0;
+    }
+    .card_content--paciente, .card_pacientes_info-infos, .lembrete_container {
+        padding: var(--second-padding);
+        font-size: 17px;
+    }
+    .card_horas_info {
+        font-size: 21px;
+    }
+    .dia_semana_header {
+        font-size: 24px;
+    }
+    .info_day, .dia_semana_card_content-info {
+        font-size: 17px;
+    }
+    .semana_header {
+        font-size: 24px;
+    }
+    .semana_mes_container {
+        margin: 30px 15px;
+    }
+    .dia_semana {
+        border: 0;
+        box-shadow: 0 2px 5px var(--second-color);
+    }
+    .card_lembretes_header .material-icons {
+        display: block;
+    }
+    /* PACIENTES ++ */
+    .main #first__accordion__paciente {
+        margin-top: 100px;
+    }
+    .box__paciente__header {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas: "nomeImg nomeImg" "presencial dia" "ativo mais";
+    }
+    .box_paciente_left_side {
+        grid-area: nomeImg;
+    }
+    #box__paciente__header-presencial {
+        grid-area: presencial;
+        font-size: 17px;
+        margin-top: 20px;
+    }
+    #box_paciente_center-first {
+        grid-area: dia;
+        margin-top: 20px;
+        justify-content: flex-end;
+    }
+    #box_paciente_center-first span {
+        font-size: 17px;
+        margin: 0 5px;
+    }
+    #box_paciente_center-second {
+        grid-area: ativo;
+        justify-content: flex-start;
+        margin-top: 20px;
+    }
+    #box_paciente_center-second span {
+        margin: 0;
+    }
+    .box_paciente_left_right {
+        grid-area: mais;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+    .box_paciente_left_side {
+        justify-content: unset;
+        font-size: 24px;
+    }
+    .accordion__paciente {
+        box-shadow: 0 2px 5px var(--second-color);
+    }
+    .accordion__paciente.active {
+        box-shadow: none;
+        border-bottom-left-radius: 0;
+    }
+    .box__paciente_body_content {
+        grid-template-columns: 1fr;
+    }
+    .info_pessoais, .info_consultas, .info_financeiras {
+        margin-top: 20px;
+    }
+    .info_financeiras {
+        margin-bottom: 10px;
+    }
+    .info_container {
+        font-size: 17px;
+    }
+    .pacinte_nome {
+        padding-top: 10px;
+    }
+    .espacamento {
+        height: 70px;
+        display: block;
+    }
+    /* ================================== Meus Horarios ==========================*/
+    /* ================================== Meus Horarios ==========================*/
+    /* ================================== Meus Horarios ==========================*/
+    .minha_agenda_container {
+        margin: 100px 5px 100px 5px;
+        overflow-x: auto;
+        border: 0;
+        border-radius: 0;
+        padding: 5px 15px;
+    }
+    .horas_container {
+        display: none;
+    }
+    .dias_container {
+        gap: 15px;
+        background: none;
+    }
+    .paciente_horario {
+        background: var(--white-color);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 15px 0 0;
+    }
+    .dia {
+        min-width: 290px;
+        border-radius: 30px;
+        box-shadow: 0 2px 5px var(--second-color);
+    }
+    .dia .dia_header {
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 15px 0 0;
+    }
+    .dia .dia_footer {
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+    .paciente_horario::before {
+        content: attr(data-hora);
+        position: relative;
+        margin-right: 25%;
+        padding: 15px;
+        min-width: 45px;
+        background: var(--fourth-color);
+        color: var(--white-color);
+    }
+    .dia .dia_header::before {
+        content: 'schedule';
+        position: relative;
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+        margin-right: 25%;
+        padding: 10px 10px 10px 15px;
+    }
+}
+
 @keyframes rotate_icon {
     from {
         transform: rotate(0deg);
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes nice_appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes confirmClose {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+}
+
+@keyframes confirm-window-open {
+    to {
+        opacity: 1;
+        transform: scale(1);
     }
 }

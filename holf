@@ -1,0 +1,3 @@
+<input type="text" name="nome" id="pacienteNome" placeholder="Nome">
+<input type="number" name="idade" id="pacienteIdade" placeholder="Idade">
+<input type="date" name="dataDeNascimento" id="pacientedataDeNascimento">
