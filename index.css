@@ -1047,11 +1047,15 @@ body {
     gap: 10px;
 }
 
-.more_fields--select-content, .select_all {
+.more_fields--select-content, .select_all, .message_no_fields_available {
     padding: var(--large-padding) 10px;
     border: 1px solid var(--main-color);
     border-radius: 5px;
     transition: all 0.2s;
+    cursor: pointer;
+}
+.select_all, .message_no_fields_available {
+    cursor: initial;
 }
 
 .select_all{
