@@ -79,12 +79,12 @@ export default {
         const fieldsToInsert = campos.map(campo => {
             let contains = false;
             document.querySelectorAll('.form_novo_paciente input').forEach(i => {
-                if (i.getAttribute('id') == campo.innerHTML) contains = true;
+                if (i.getAttribute('id') == campo.innerHTML.replace(' ','')) contains = true;
             });
             return !contains ? `
             <div class="input_container">
                 <label for="nome">${campo.innerHTML}</label>
-                <input type="text" name=${campo.innerHTML} id=${campo.innerHTML}>
+                <input type="text" name=${campo.innerHTML.replace(' ','')} id=${campo.innerHTML.replace(' ','')}>
             </div>
             ` : '';
         });
