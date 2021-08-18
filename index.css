@@ -891,6 +891,7 @@ body {
     animation-fill-mode: forwards;
     animation-delay: 0.2s;
 }
+
 .more_filds {
     max-width: 500px;
 }
@@ -919,7 +920,7 @@ body {
     transform: scale(1.3);
 }
 
-.novo_paciente_windown_body {
+.novo_paciente_windown_body, .more_filds--body {
     width: 100%;
     padding: 30px;
     display: flex;
@@ -1003,7 +1004,7 @@ body {
     justify-content: flex-end;
 }
 
-.novo_paciente_windown_form_footer button {
+.novo_paciente_windown_form_footer button, .more_filds_body_footer button {
     padding: 15px 20px;
     font-size: 17px;
     font-family: var(--main-font);
@@ -1017,9 +1018,68 @@ body {
     margin-left: 20px;
 }
 
-.novo_paciente_windown_form_footer button:hover {
+.novo_paciente_windown_form_footer button:hover,  .more_filds_body_footer button:hover {
     box-shadow: 0 3px 5px var(--main-color);
     background: var(--fourth-color);
+}
+
+/* select__container mais campos */
+
+/* select__container mais campos */
+
+/* select__container mais campos */
+
+.more_filds--body {
+    flex-direction: column;
+    background: #f5f5f5;
+    padding-top: 5px;
+}
+
+.select__container {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    max-height: 230px;
+    overflow-y: auto;
+    padding: 15px 5px;
+    gap: 10px;
+}
+
+.more_fields--select-content, .select_all {
+    padding: var(--large-padding) 10px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.select_all{
+    padding: var(--main-padding) 10px;
+    text-align: center;
+}
+
+.more_fields--select-content.selected, .select_all.selected_all{
+    color: var(--white-color);
+    background: var(--third-color);
+    padding: var(--main-padding) 10px;
+}
+
+.more_filds_body_footer {
+    margin: 30px 0 0 0;
+}
+
+.more_filds_body_footer button {
+    padding: 15px 20px;
+    font-size: 17px;
+    font-family: var(--main-font);
+    background: var(--third-color);
+    color: var(--white-color);
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 50%);
+    border-radius: 15px
 }
 
 /* add_new_paciente_content_mobile */
@@ -1078,6 +1138,9 @@ body {
     .navbar .bx-menu {
         display: block;
     }
+    *::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @media screen and (max-width:868px) {
@@ -1124,7 +1187,7 @@ body {
         justify-content: center;
         align-items: center;
     }
-    .novo_paciente_windown_form_footer button {
+    .novo_paciente_windown_form_footer button,  .more_filds_body_footer button {
         margin: 0;
     }
     #add_campo {
@@ -1231,9 +1294,6 @@ body {
     }
     .card_box_days {
         margin-top: 100px;
-    }
-    .minha_agenda_container::-webkit-scrollbar, .card_box_days::-webkit-scrollbar, .card_box_controle::-webkit-scrollbar {
-        display: none;
     }
     .card_day, .card_pacientes_info, .card_financeiro_info, .card_horas_info, .card_lembretes {
         padding: var(--main-padding) var(--second-padding);
