@@ -10,7 +10,7 @@ export default {
                                 <span class="material-icons novo_paciente_windown_header--btn_close">close</span>
                             </div>
                             <div class="novo_paciente_windown_body">
-                                <form action="">
+                                <form class="form_novo_paciente" action="">
                                     <div class="input_container">
                                         <label for="nome">Nome</label>
                                         <input type="text" name="nome" id="nome">
@@ -139,7 +139,5 @@ export default {
         })
     },
 
-    _moreFields(element) {
-
-    }
+    
 }
