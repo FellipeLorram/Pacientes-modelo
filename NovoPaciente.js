@@ -102,6 +102,10 @@ export default {
                                             <input type="text" name="Estado" id="Estado">
                                         </div>
                                     </div>
+                                    <div id="last_container" class="input_container">
+                                        <label for="nome">Observações</label>
+                                        <textarea class="text_area_field" name="observacoes" id="observacoes" cols="30" rows="4"></textarea>
+                                    </div>
                                 <div class="novo_paciente_windown_form_footer">
                                     <button id="add_campo">Adicionar Campo</button>
                                     <button type="submit">Finalizar</button>
