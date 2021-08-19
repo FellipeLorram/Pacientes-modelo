@@ -971,7 +971,7 @@ body {
     font-size: 17px;
 }
 
-.novo_paciente_windown_body input:focus, .text_area_field:focus {
+.input_container input:focus, .text_area_field:focus {
     border: 0.5px solid var(--fourth-color);
 }
 
@@ -1131,6 +1131,10 @@ body {
 .large_field.selected, .normal_field.selected {
     background: var(--fourth-color);
     color: var(--white-color);
+}
+
+#customField.required_field {
+    border: 2px solid var(--red-color);
 }
 
 /* add_new_paciente_content_mobile */
