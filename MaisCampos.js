@@ -78,20 +78,20 @@ export default {
         const fieldsToInsert = campos.map(campo => {
             let contains = false;
             document.querySelectorAll('.form_novo_paciente input').forEach(i => {
-                if (i.getAttribute('id') == campo.innerHTML.replace(' ', '')) contains = true;
+                if (i.getAttribute('id') == campo.innerHTML.replace(' ', '').replace(',', '')) contains = true;
             });
 
             if (campo.classList.contains('text_area') && !contains) return `
             <div id="last_container" class="input_container">
                 <label for="nome">${campo.innerHTML}</label>
-                <textarea class="text_area_field" name=${campo.innerHTML.replace(' ', '')} id=${campo.innerHTML.replace(' ', '')} cols="30" rows="4"></textarea>
+                <textarea class="text_area_field" name=${campo.innerHTML.replace(' ', '').replace(',', '')} id=${campo.innerHTML.replace(' ', '').replace(',', '')} cols="30" rows="4"></textarea>
             </div>
             `
 
             return !contains ? `
             <div class="input_container">
                 <label for="nome">${campo.innerHTML}</label>
-                <input type="text" name=${campo.innerHTML.replace(' ', '')} id=${campo.innerHTML.replace(' ', '')}>
+                <input type="text" name=${campo.innerHTML.replace(' ', '').replace(',', '')} id=${campo.innerHTML.replace(' ', '').replace(',', '')}>
             </div>
             ` : '';
 
@@ -109,8 +109,15 @@ export default {
             { content: '<div class="more_fields--select-content">Encaminhamento</div>', key: 'Encaminhamento', available: true },
             { content: '<div class="more_fields--select-content">Co-morbidades</div>', key: 'Co-morbidades', available: true },
             { content: '<div class="more_fields--select-content">Responsável/acompanhante</div>', key: 'Responsável/acompanhante', available: true },
+            { content: '<div class="more_fields--select-content">Antecedente familiar</div>', key: 'Antecedentefamiliar', available: true },
             { content: '<div class="more_fields--select-content text_area">Composição familiar</div>', key: 'Composiçãofamiliar', available: true },
             { content: '<div class="more_fields--select-content text_area">Queixa principal</div>', key: 'Queixaprincipal', available: true },
+            { content: '<div class="more_fields--select-content text_area">História</div>', key: 'História', available: true },
+            { content: '<div class="more_fields--select-content text_area">Tratamentos anteriores/atuais</div>', key: 'Tratamentosanteriores/atuais', available: true },
+            { content: '<div class="more_fields--select-content text_area">Internação/cirurgias</div>', key: 'Internação/cirurgias', available: true },
+            { content: '<div class="more_fields--select-content text_area">Uso de álcool, cigarro, outros</div>', key: 'lUsodeálcoolcigarrooutros', available: true },
+            { content: '<div class="more_fields--select-content text_area">Atividades atuais</div>', key: 'Atividadesatuais', available: true },
+            { content: '<div class="more_fields--select-content text_area">Rotina diária</div>', key: 'Rotinadiária', available: true },
         ]
 
         const available = fields.map(field => {
