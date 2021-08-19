@@ -54,12 +54,11 @@ export default {
             });
         });
 
-        btnAdd.addEventListener('click', () => {
-            this._addFields(Array.from(campos).filter(campo => campo.classList.contains('selected')), windownContainer);
-        });
+        const clickFunctionAddFields = () => this._addFields(Array.from(campos).filter(campo => campo.classList.contains('selected')), windownContainer);
+        btnAdd.addEventListener('click', clickFunctionAddFields);
 
         customAdd.addEventListener('click', () => {
-            this._customField();
+            this._customField(windownContainer, btnAdd, clickFunctionAddFields);
         });
 
         document.body.appendChild(template.content);
@@ -132,7 +131,7 @@ export default {
         return available ? available : '<div class="message_no_fields_available">Personalize seu Proximo campo</div>'
     },
 
-    _customField() {
+    _customField(windownContainer, btnAdd, clickFunctionAddFields) {
         const selectArea = document.querySelector('.select__container');
         selectArea.classList.add('nice_change');
         document.querySelector('.personalizar_campo').style.display = 'none';
@@ -161,7 +160,7 @@ export default {
             [normalFIeld, largeFIeld].forEach(field => {
                 field.addEventListener('click', e => {
 
-                    [normalFIeld, largeFIeld].forEach( choice => {
+                    [normalFIeld, largeFIeld].forEach(choice => {
                         choice.classList.remove('selected');
                     });
 
@@ -170,7 +169,26 @@ export default {
             });
 
 
-        }, 200)
+        }, 200);
 
+        btnAdd.removeEventListener('click', clickFunctionAddFields);
+        btnAdd.addEventListener('click', () => {
+            const fieldLabel = document.querySelector('#customField');
+
+            if (!fieldLabel.value) {
+                fieldLabel.classList.add('required_field');
+                return
+            }
+
+            const newField = document.createElement('div');
+            newField.innerHTML = fieldLabel.value
+
+
+            if (document.querySelector('.selected').classList.contains('normal_field')) return this._addFields([newField], windownContainer)
+
+            newField.classList.add('text_area')
+            return this._addFields([newField], windownContainer);
+
+        });
     }
 }
