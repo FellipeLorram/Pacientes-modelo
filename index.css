@@ -943,7 +943,7 @@ body {
     background-size: 16px 12px;
 }
 
-.novo_paciente_windown_body input, .novo_paciente_windown_body select {
+.input_container input, .input_container select, .text_area_field {
     display: block;
     width: 100%;
     padding: .375rem .75rem;
@@ -971,11 +971,11 @@ body {
     font-size: 17px;
 }
 
-.novo_paciente_windown_body input:focus {
+.novo_paciente_windown_body input:focus, .text_area_field:focus {
     border: 0.5px solid var(--fourth-color);
 }
 
-.novo_paciente_windown_body input:focus-visible {
+.novo_paciente_windown_body input:focus-visible, .text_area_field:focus-visible {
     border: 1px solid var(--fourth-color);
     box-shadow: 1px 1px 5px var(--mainShaddow-color);
 }
@@ -1018,7 +1018,7 @@ body {
     margin-left: 20px;
 }
 
-.novo_paciente_windown_form_footer button:hover,  .more_filds_body_footer button:hover {
+.novo_paciente_windown_form_footer button:hover, .more_filds_body_footer button:hover {
     box-shadow: 0 3px 5px var(--main-color);
     background: var(--fourth-color);
 }
@@ -1054,16 +1054,17 @@ body {
     transition: all 0.2s;
     cursor: pointer;
 }
+
 .select_all, .message_no_fields_available {
     cursor: initial;
 }
 
-.select_all{
+.select_all {
     padding: var(--main-padding) 10px;
     text-align: center;
 }
 
-.more_fields--select-content.selected, .select_all.selected_all{
+.more_fields--select-content.selected, .select_all.selected_all {
     color: var(--white-color);
     background: var(--third-color);
     padding: var(--main-padding) 10px;
@@ -1084,6 +1085,52 @@ body {
     border: 0;
     box-shadow: 0 3px 5px rgb(0 0 0 / 50%);
     border-radius: 15px
+}
+
+/* persnalizar campo */
+
+/* persnalizar campo */
+
+/* persnalizar campo */
+
+.select_custom_input_size {
+    width: 100%;
+}
+
+.select_custom_input_size--header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.select_custom_input_size--body {
+    display: grid;
+    grid-template-rows: 0.5fr 1fr;
+    gap: 5px;
+}
+
+.large_field, .normal_field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-color);
+    border: 0.5px solid var(--main-color);
+    width: 100%;
+    padding: 30px;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+.normal_field {
+    padding: 10px;
+}
+
+.large_field.selected, .normal_field.selected {
+    background: var(--fourth-color);
+    color: var(--white-color);
 }
 
 /* add_new_paciente_content_mobile */
@@ -1191,7 +1238,7 @@ body {
         justify-content: center;
         align-items: center;
     }
-    .novo_paciente_windown_form_footer button,  .more_filds_body_footer button {
+    .novo_paciente_windown_form_footer button, .more_filds_body_footer button {
         margin: 0;
     }
     #add_campo {
@@ -1522,4 +1569,34 @@ body {
         opacity: 1;
         transform: scale(1);
     }
+}
+
+@keyframes niceChange {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+@keyframes niceChangeContinuos {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.nice_change {
+    animation: niceChange 0.3s;
+}
+
+.nice_change_continuos {
+    animation: niceChangeContinuos 0.3s;
 }
