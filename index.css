@@ -1056,7 +1056,7 @@ body {
     width: 100%;
     padding: 20px;
     font-size: 17px;
-    color: var(--white-color);
+    background: var(--white-color);
     font-weight: bold;
     border-radius: 15px;
     transition: all 0.2s ease-in-out;
@@ -1064,18 +1064,18 @@ body {
 }
 
 .info_accordion_form--header.pessoais {
-    background: var(--main-color);
-}
-.info_accordion_form--header.pessoais:hover {
-    background: var(--mainShaddow-color);
+    box-shadow: inset  0.5px 0 5px var(--main-color), inset -1px -1px 5px var(--main-color);
+    color: var(--fourth-color);
 }
 
 .info_accordion_form--header.conultas {
-    background: var(--consultas-color);
+    box-shadow: inset 0.5px 0 5px var(--consultas-color), inset -1px -1px 5px var(--consultas-color);
+    color: var(--consultas-color);
 }
 
 .info_accordion_form--header.financeiro {
-    background: var(--financeiro-color);
+    box-shadow: inset  0.5px 0 5px var(--financeiro-color), inset -1px -1px 5px var(--financeiro-color);
+    color: var(--financeiro-color);
 }
 
 .info_accordion_form--header.active {
