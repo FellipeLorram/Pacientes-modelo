@@ -9,7 +9,10 @@
     --red-color: #ff4000;
     --yellow-color: #99b3ff;
     --darkerYellow-color: #668cff;
+    --darkerBlue-color: #0039e6;
     --white-color: #fff;
+    --consultas-color: #d75bb8;
+    --financeiro-color: #bfe798;
     --font-size1: 24px;
     --font-size2: 20px;
     --main-padding: 20px;
@@ -854,7 +857,7 @@ body {
 
 /* NOVO PACIENTE WINDOWN*/
 
-.novo_paciente_windown_container, .more_filds_container {
+.novo_paciente_windown_container, .more_filds_container, .novo_lembrete_windown_container {
     font-family: var(--main-font);
     z-index: 20000;
     position: fixed;
@@ -879,7 +882,7 @@ body {
     animation-name: confirmClose;
 }
 
-.novo_paciente_windown, .more_filds {
+.novo_paciente_windown, .more_filds, .novo_lembrete_windown {
     width: 100%;
     max-width: 1000px;
     max-height: 100vh;
@@ -892,11 +895,11 @@ body {
     animation-delay: 0.2s;
 }
 
-.more_filds {
+.more_filds, .novo_lembrete_windown {
     max-width: 500px;
 }
 
-.novo_paciente_windown_header, .more_filds--header {
+.novo_paciente_windown_header, .more_filds--header, .novo_lembrete_windown_header {
     background: var(--white-color);
     padding: 20px;
     display: flex;
@@ -910,19 +913,23 @@ body {
     border-top-right-radius: 30px;
 }
 
-.novo_paciente_windown_header--btn_close, .more_filds_header--btn_close {
+.novo_lembrete_windown_header {
+    background: var(--darkerYellow-color);
+}
+
+.novo_paciente_windown_header--btn_close, .more_filds_header--btn_close, .novo_lembrete_windown_header--btn_close {
     transition: color 0.2s, transform 0.2s;
 }
 
-.novo_paciente_windown_header--btn_close:hover, .more_filds_header--btn_close:hover {
+.novo_paciente_windown_header--btn_close:hover, .more_filds_header--btn_close:hover, .novo_lembrete_windown_header--btn_close:hover {
     color: var(--red-color);
     cursor: pointer;
     transform: scale(1.3);
 }
 
-.novo_paciente_windown_body, .more_filds--body {
+.novo_paciente_windown_body, .more_filds--body, .novo_lembrete_windown_body {
     width: 100%;
-    padding: 30px;
+    padding: 30px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -930,6 +937,10 @@ body {
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     box-shadow: inset 1px 1px 5px var(--main-color), inset -1px -1px 5px var(--main-color);
+}
+
+.novo_lembrete_windown_body {
+    box-shadow: inset 1px 1px 5px var(--darkerYellow-color), inset -1px -1px 5px var(--darkerYellow-color);
 }
 
 .novo_paciente_windown_body form {
@@ -963,6 +974,10 @@ body {
     margin-top: 5px;
 }
 
+#lembrete {
+    border: 1px solid var(--yellow-color);
+}
+
 .input_container {
     margin-bottom: 50px;
 }
@@ -978,6 +993,10 @@ body {
 .novo_paciente_windown_body input:focus-visible, .text_area_field:focus-visible {
     border: 1px solid var(--fourth-color);
     box-shadow: 1px 1px 5px var(--mainShaddow-color);
+}
+
+#lembrete:focus-visible {
+    box-shadow: 1px 1px 5px var(--darkerYellow-color);
 }
 
 .novo_paciente_windown_body .container__3 {
@@ -1004,7 +1023,7 @@ body {
     justify-content: flex-end;
 }
 
-.novo_paciente_windown_form_footer button, .more_filds_body_footer button {
+.novo_paciente_windown_form_footer button, .more_filds_body_footer button, #add_campo {
     padding: 15px 20px;
     font-size: 17px;
     font-family: var(--main-font);
@@ -1021,6 +1040,75 @@ body {
 .novo_paciente_windown_form_footer button:hover, .more_filds_body_footer button:hover {
     box-shadow: 0 3px 5px var(--main-color);
     background: var(--fourth-color);
+}
+
+.info_accordion_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.info_accordion_form--header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    font-size: 17px;
+    color: var(--white-color);
+    font-weight: bold;
+    border-radius: 15px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.info_accordion_form--header.pessoais {
+    background: var(--main-color);
+}
+.info_accordion_form--header.pessoais:hover {
+    background: var(--mainShaddow-color);
+}
+
+.info_accordion_form--header.conultas {
+    background: var(--consultas-color);
+}
+
+.info_accordion_form--header.financeiro {
+    background: var(--financeiro-color);
+}
+
+.info_accordion_form--header.active {
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 10px;
+}
+
+.info_accordion_form--header .info_accordion_form--header-icon {
+    transition: all 0.2s ease-in-out;
+}
+
+.info_accordion_form--header.active .info_accordion_form--header-icon {
+    transform: rotate(180deg);
+}
+
+.info_accordion_form--body {
+    margin-bottom: 30px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    max-height: 0;
+}
+
+.info_accordion_form--body.active {
+    border-bottom: 0.5px solid var(--fourth-color);
+    border-radius: 0 0 15px 15px;
+    padding: 20px 10px 10px 10px;
+    overflow: auto;
+}
+
+.button_accordion_container {
+    display: flex;
+    text-align: center;
+    justify-content: flex-end;
 }
 
 /* select__container mais campos */
@@ -1041,7 +1129,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    max-height: 230px;
+    max-height: 250px;
     overflow-y: auto;
     padding: 15px 5px;
     gap: 10px;
@@ -1074,7 +1162,14 @@ body {
     margin: 30px 0 0 0;
 }
 
-.more_filds_body_footer button {
+.lembretes_body_footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 0 0;
+}
+
+.more_filds_body_footer button, .lembretes_body_footer button {
     padding: 15px 20px;
     font-size: 17px;
     font-family: var(--main-font);
@@ -1085,6 +1180,10 @@ body {
     border: 0;
     box-shadow: 0 3px 5px rgb(0 0 0 / 50%);
     border-radius: 15px
+}
+
+.lembretes_body_footer button {
+    background: var(--darkerBlue-color);
 }
 
 /* persnalizar campo */
@@ -1133,7 +1232,7 @@ body {
     color: var(--white-color);
 }
 
-#customField.required_field {
+#customField.required_field, #lembrete.required_field {
     border: 2px solid var(--red-color);
 }
 
@@ -1143,7 +1242,7 @@ body {
 
 /* add_new_paciente_content_mobile */
 
-.add_new_paciente_content_mobile {
+.add_new_paciente_content_mobile, .add_new_lembrete_content_mobile {
     padding: 10px 20px 10px 5px;
     display: flex;
     align-items: center;
@@ -1162,11 +1261,15 @@ body {
     transition: all 0.3s;
 }
 
-.add_new_paciente_content_mobile.active {
+.add_new_lembrete_content_mobile {
+    background: var(--darkerYellow-color);
+}
+
+.add_new_paciente_content_mobile.active, .add_new_lembrete_content_mobile.active {
     right: -26px;
 }
 
-.add_new_paciente_content_mobile.desactive {
+.add_new_paciente_content_mobile.desactive, .add_new_lembrete_content_mobile.desactive {
     right: -225px;
 }
 
@@ -1176,6 +1279,11 @@ body {
 
 .add_new_paciente_mobile_text {
     margin: 0 10px 0 5px;
+}
+
+.add_new_lembrete_mobile_text {
+    margin: 0 10px 0 5px;
+    font-size: 15px;
 }
 
 .icon_rotate {
@@ -1272,7 +1380,7 @@ body {
     .main_top_bar {
         justify-content: center;
     }
-    .add_new_paciente_content_mobile {
+    .add_new_paciente_content_mobile, .add_new_lembrete_content_mobile {
         opacity: 1;
     }
     .navigation_mobile {
