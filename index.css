@@ -1009,6 +1009,47 @@ body {
     margin-bottom: 50px;
 }
 
+.horario_consulta {
+    margin: 20px 0;
+}
+
+.horario_consulta_header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 17px;
+    background: var(--white-color);
+    border-radius: 15px 15px 0 0;
+    border-bottom: 0.5px solid var(--fourth-color);
+}
+
+.horario_consulta_dia {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white-color);
+    padding: 10px;
+    color: #d75bb8;
+    font-size: 15px;
+}
+
+.horario_consulta_dia-icon {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.horario_consulta_dia-icon:hover {
+    transform: scale(1.5);
+}
+
+.horario_consulta_dia-text{
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .novo_paciente_windown_body label {
     font-size: 17px;
 }
