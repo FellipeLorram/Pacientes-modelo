@@ -11,8 +11,6 @@
     --darkerYellow-color: #668cff;
     --darkerBlue-color: #0039e6;
     --white-color: #fff;
-    --consultas-color: #d75bb8;
-    --financeiro-color: #bfe798;
     --font-size1: 24px;
     --font-size2: 20px;
     --main-padding: 20px;
@@ -929,7 +927,7 @@ body {
 
 .novo_paciente_windown_body, .more_filds--body, .novo_lembrete_windown_body {
     width: 100%;
-    padding: 30px 20px;
+    padding: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -941,6 +939,35 @@ body {
 
 .novo_lembrete_windown_body {
     box-shadow: inset 1px 1px 5px var(--darkerYellow-color), inset -1px -1px 5px var(--darkerYellow-color);
+}
+
+.info_form_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.info_form_header.pessoais {
+    color: var(--mainShaddow-color);
+    margin-bottom: 20px;
+}
+
+.infoPessoaisContainerForm {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.infoPessoaisContainerForm.pessoais {
+    background: #faeaf6;
+}
+
+.infoPessoaisContainerForm.consulta {
+    background: #f0c1e4;
+    margin-top: 20px;
+}
+
+.info_form_header.consultas {
+    color: #d75bb8;
 }
 
 .novo_paciente_windown_body form {
@@ -1021,9 +1048,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-top: 30px;
 }
 
-.novo_paciente_windown_form_footer button, .more_filds_body_footer button, #add_campo {
+.novo_paciente_windown_form_footer.first {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.novo_paciente_windown_form_footer button, .more_filds_body_footer button {
     padding: 15px 20px;
     font-size: 17px;
     font-family: var(--main-font);
@@ -1040,75 +1075,6 @@ body {
 .novo_paciente_windown_form_footer button:hover, .more_filds_body_footer button:hover {
     box-shadow: 0 3px 5px var(--main-color);
     background: var(--fourth-color);
-}
-
-.info_accordion_form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.info_accordion_form--header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-    font-size: 17px;
-    background: var(--white-color);
-    font-weight: bold;
-    border-radius: 15px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-}
-
-.info_accordion_form--header.pessoais {
-    box-shadow: inset  0.5px 0 5px var(--main-color), inset -1px -1px 5px var(--main-color);
-    color: var(--fourth-color);
-}
-
-.info_accordion_form--header.conultas {
-    box-shadow: inset 0.5px 0 5px var(--consultas-color), inset -1px -1px 5px var(--consultas-color);
-    color: var(--consultas-color);
-}
-
-.info_accordion_form--header.financeiro {
-    box-shadow: inset  0.5px 0 5px var(--financeiro-color), inset -1px -1px 5px var(--financeiro-color);
-    color: var(--financeiro-color);
-}
-
-.info_accordion_form--header.active {
-    border-radius: 15px 15px 0 0;
-    margin-bottom: 10px;
-}
-
-.info_accordion_form--header .info_accordion_form--header-icon {
-    transition: all 0.2s ease-in-out;
-}
-
-.info_accordion_form--header.active .info_accordion_form--header-icon {
-    transform: rotate(180deg);
-}
-
-.info_accordion_form--body {
-    margin-bottom: 30px;
-    overflow: hidden;
-    transition: all 0.2s ease-in-out;
-    max-height: 0;
-}
-
-.info_accordion_form--body.active {
-    border-bottom: 0.5px solid var(--fourth-color);
-    border-radius: 0 0 15px 15px;
-    padding: 20px 10px 10px 10px;
-    overflow: auto;
-}
-
-.button_accordion_container {
-    display: flex;
-    text-align: center;
-    justify-content: flex-end;
 }
 
 /* select__container mais campos */
@@ -1357,7 +1323,6 @@ body {
         font-size: 14px;
         padding: 12px 17px;
         min-height: 47px;
-        margin-right: 20px;
     }
 }
 
