@@ -121,6 +121,18 @@ export default {
                         <div class="info_form_header consultas">
                             <h3>Consultas</h3>
                         </div>
+
+                        <div class="horario_consulta">
+                            <div class="horario_consulta_header">
+                                Horários disponiveis
+                            </div>
+                            <div class="horario_consulta_dia">
+                                <span id="minus" class="material-icons horario_consulta_dia-icon">chevron_left</span>
+                                <span class="horario_consulta_dia-text">Segunda</span>
+                                <span id="more" class="material-icons horario_consulta_dia-icon">chevron_right</span>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="novo_paciente_windown_form_footer">
                         <button type="submit">Finalizar</button>
@@ -129,7 +141,11 @@ export default {
             </div>
         </div>
     </div>
+
                 `;
+
+        let posicao = 0;
+        const dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'];
 
         const template = document.createElement("template");
         template.innerHTML = html;
@@ -137,6 +153,15 @@ export default {
         const windownContainer = template.content.querySelector(".novo_paciente_windown_container");
         const btnClose = template.content.querySelector(".novo_paciente_windown_header--btn_close");
         const btnAddCampo = template.content.querySelector("#add_campo");
+        const btnHorariosConsultaMinus = template.content.querySelector("#minus");
+        const btnHorariosConsultaMore = template.content.querySelector("#more");
+
+        btnHorariosConsultaMore.addEventListener('click', () => {
+            posicao += 1;
+            if(posicao == 6) posicao = 0;
+            document.querySelector('.horario_consulta_dia-text').innerHTML = dias[posicao];
+
+        });
 
         btnAddCampo.addEventListener('click', e => {
             e.preventDefault();
@@ -146,7 +171,7 @@ export default {
             this._close(windownContainer);
         });
         document.body.appendChild(template.content);
-        document.body.classList.add('stop-scrolling')
+        document.body.classList.add('stop-scrolling');
     },
 
     _close(windownContainer) {
