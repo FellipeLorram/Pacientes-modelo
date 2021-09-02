@@ -42,9 +42,7 @@ export default {
                                 <input type="text" name="naturalidade" id="naturalidade">
                             </div>
                         </div>
-
                         <div class="container__3">
-
                             <div class="input_container">
                                 <label for="estadoCivil">Estado Civil</label>
                                 <select name="estadoCivil" id="estadoCivil">
@@ -63,11 +61,8 @@ export default {
                                 <label for="RG">RG</label>
                                 <input type="number" name="RG" id="RG">
                             </div>
-
                         </div>
-
                         <div class="container__3">
-
                             <div class="input_container">
                                 <label for="escolaridade">Escolaridade</label>
                                 <input type="text" name="escolaridade" id="escolaridade">
@@ -80,9 +75,7 @@ export default {
                                 <label for="religiao">Religião</label>
                                 <input type="text" name="religiao" id="religiao">
                             </div>
-
                         </div>
-
                         <div class="container__2">
                             <div class="input_container">
                                 <label for="endereco">Endereço</label>
@@ -115,21 +108,18 @@ export default {
                         <div class="novo_paciente_windown_form_footer first">
                             <button id="add_campo">Adicionar Campo</button>
                         </div>
-
                     </div>
                     <div class="infoPessoaisContainerForm consulta">
-
                         <div class="info_form_header consultas">
                             <h3>Consultas</h3>
                         </div>
-
                         <div class="horario_consulta">
                             <div class="horario_consulta_header">
                                 Horários disponiveis
                             </div>
                             <div class="horario_consulta_dia">
                                 <span id="minus" class="material-icons horario_consulta_dia-icon">chevron_left</span>
-                                <span class="horario_consulta_dia-text">Segunda</span>
+                                <span class="horario_consulta_dia-text"></span>
                                 <span id="more" class="material-icons horario_consulta_dia-icon">chevron_right</span>
                             </div>
                             <div class="horario_consulta_horas_container">
@@ -143,7 +133,6 @@ export default {
             </div>
         </div>
     </div>
-
                 `;
 
         let posicao = 0;
@@ -156,19 +145,24 @@ export default {
         const btnAddCampo = template.content.querySelector("#add_campo");
         const btnHorariosConsultaMinus = template.content.querySelector("#minus");
         const btnHorariosConsultaMore = template.content.querySelector("#more");
+        const Dia = template.content.querySelector('.horario_consulta_dia-text');
+        Dia.innerHTML = Dias[posicao].dia;
+        const horaContainer = template.content.querySelector('.horario_consulta_horas_container');
 
-        btnHorariosConsultaMore.addEventListener('click', () => {
+        this._availablesHours(posicao, horaContainer)
+
+        btnHorariosConsultaMore.addEventListener('click', e => {
             posicao++;
             if (posicao == 6) posicao = 0;
-            document.querySelector('.horario_consulta_dia-text').innerHTML = Dias[posicao].dia;
-            this._availablesHours(posicao)
+            Dia.innerHTML = Dias[posicao].dia;
+            this._availablesHours(posicao, horaContainer);
         });
 
         btnHorariosConsultaMinus.addEventListener('click', () => {
             posicao--;
             if (posicao == -1) posicao = 5;
-            document.querySelector('.horario_consulta_dia-text').innerHTML = Dias[posicao].dia;
-            this._availablesHours(posicao)
+            Dia.innerHTML = Dias[posicao].dia;
+            this._availablesHours(posicao, horaContainer)
         });
 
         btnAddCampo.addEventListener('click', e => {
@@ -193,18 +187,22 @@ export default {
         })
     },
 
-    _availablesHours(posicao) {
-        const horaContainer = document.querySelector('.horario_consulta_horas_container');
+    _availablesHours(posicao, horaContainer) {
         horaContainer.innerHTML = '';
+
         const horas = Object.entries(Dias[posicao].horario).map(hora => {
-            const h = document.createElement('div')
-            h.classList.add('horario_consulta_horas-hora');
-            h.classList.add('niceChangeContinuos');
-            //h.classList.add('horario_consulta_horas-hora');
-            h.innerHTML = hora[0];
-            if (!hora[1]) h.classList.add('not_available');
-            return h
+            const horaToSet = document.createElement('div')
+            horaToSet.classList.add('horario_consulta_horas-hora');
+            horaToSet.classList.add('nice_change_continuos');
+            horaToSet.innerHTML = hora[0];
+            if (!hora[1]) horaToSet.classList.add('not_available');
+            return horaToSet
         });
+
+        horas.forEach(hora => hora.addEventListener('click', e => {
+            horas.forEach(hora => hora.classList.remove('selected'))
+            if(!e.target.classList.contains('not_available'))e.target.classList.add('selected');
+        }));
 
         horas.forEach(hora => horaContainer.appendChild(hora))
     },
