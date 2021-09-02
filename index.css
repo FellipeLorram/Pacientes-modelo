@@ -883,7 +883,7 @@ body {
 .novo_paciente_windown, .more_filds, .novo_lembrete_windown {
     width: 100%;
     max-width: 1000px;
-    max-height: 100vh;
+    max-height: 90vh;
     padding: 20px 0;
     opacity: 0;
     transform: scale(0);
