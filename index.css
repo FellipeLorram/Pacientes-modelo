@@ -1062,14 +1062,16 @@ body {
     cursor: pointer;
 }
 
-.horario_consulta_horas-hora.selected{
+.horario_consulta_horas-hora.selected {
     background: var(--fourth-color);
     color: #fff;
     padding: 5px;
 }
+
 .horario_consulta_horas-hora.not_available {
     background: #ff9999;
     cursor: initial;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .horario_consulta_dia-icon {
@@ -1692,6 +1694,9 @@ body {
         margin-right: 25%;
         padding: 10px 10px 10px 15px;
     }
+    .horario_consulta_horas_container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @keyframes rotate_icon {
@@ -1750,10 +1755,36 @@ body {
     }
 }
 
+@keyframes leftToRight_animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(150%);
+    }
+}
+
+@keyframes RightToleft_animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 .nice_change {
     animation: niceChange 0.3s;
 }
 
 .nice_change_continuos {
     animation: niceChangeContinuos 0.3s;
+}
+
+.leftToRight_animation {
+    animation: leftToRight_animation 0.3s;
+}
+
+.RightToleft_animation {
+    animation: RightToleft_animation 0.3s;
 }
