@@ -1036,6 +1036,42 @@ body {
     font-size: 15px;
 }
 
+.horario_consulta_horas_container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    background: var(--white-color);
+    padding: 10px;
+    color: #d75bb8;
+    font-size: 15px;
+    gap: 5px;
+    border-radius: 0 0 15px 15px;
+}
+
+.horario_consulta_horas-hora {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 10px;
+    color: var(--fourth-color);
+    border: 0.5px solid var(--fourth-color);
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+}
+
+.horario_consulta_horas-hora.selected{
+    background: var(--fourth-color);
+    color: #fff;
+    padding: 5px;
+}
+.horario_consulta_horas-hora.not_available {
+    background: #ff9999;
+    cursor: initial;
+}
+
 .horario_consulta_dia-icon {
     cursor: pointer;
     transition: all 0.2s;
@@ -1045,7 +1081,7 @@ body {
     transform: scale(1.5);
 }
 
-.horario_consulta_dia-text{
+.horario_consulta_dia-text {
     font-size: 18px;
     font-weight: bold;
 }
@@ -1517,6 +1553,9 @@ body {
         display: block;
     }
     /* PACIENTES ++ */
+    .novo_paciente_windown_body {
+        padding: 10px;
+    }
     .main #first__accordion__paciente {
         margin-top: 100px;
     }
