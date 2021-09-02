@@ -1,4 +1,5 @@
 import MaisCampos from "./MaisCampos.js";
+import { Dias } from "./Data.js";
 export default {
     open() {
         const html = `  
@@ -131,8 +132,9 @@ export default {
                                 <span class="horario_consulta_dia-text">Segunda</span>
                                 <span id="more" class="material-icons horario_consulta_dia-icon">chevron_right</span>
                             </div>
+                            <div class="horario_consulta_horas_container">
+                            </div>
                         </div>
-
                     </div>
                     <div class="novo_paciente_windown_form_footer">
                         <button type="submit">Finalizar</button>
@@ -145,7 +147,6 @@ export default {
                 `;
 
         let posicao = 0;
-        const dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'];
 
         const template = document.createElement("template");
         template.innerHTML = html;
@@ -157,19 +158,28 @@ export default {
         const btnHorariosConsultaMore = template.content.querySelector("#more");
 
         btnHorariosConsultaMore.addEventListener('click', () => {
-            posicao += 1;
-            if(posicao == 6) posicao = 0;
-            document.querySelector('.horario_consulta_dia-text').innerHTML = dias[posicao];
+            posicao++;
+            if (posicao == 6) posicao = 0;
+            document.querySelector('.horario_consulta_dia-text').innerHTML = Dias[posicao].dia;
+            this._availablesHours(posicao)
+        });
 
+        btnHorariosConsultaMinus.addEventListener('click', () => {
+            posicao--;
+            if (posicao == -1) posicao = 5;
+            document.querySelector('.horario_consulta_dia-text').innerHTML = Dias[posicao].dia;
+            this._availablesHours(posicao)
         });
 
         btnAddCampo.addEventListener('click', e => {
             e.preventDefault();
             MaisCampos.open();
         });
+
         btnClose.addEventListener('click', () => {
             this._close(windownContainer);
         });
+
         document.body.appendChild(template.content);
         document.body.classList.add('stop-scrolling');
     },
@@ -181,6 +191,22 @@ export default {
             document.body.removeChild(windownContainer)
             document.body.classList.remove('stop-scrolling')
         })
+    },
+
+    _availablesHours(posicao) {
+        const horaContainer = document.querySelector('.horario_consulta_horas_container');
+        horaContainer.innerHTML = '';
+        const horas = Object.entries(Dias[posicao].horario).map(hora => {
+            const h = document.createElement('div')
+            h.classList.add('horario_consulta_horas-hora');
+            h.classList.add('niceChangeContinuos');
+            //h.classList.add('horario_consulta_horas-hora');
+            h.innerHTML = hora[0];
+            if (!hora[1]) h.classList.add('not_available');
+            return h
+        });
+
+        horas.forEach(hora => horaContainer.appendChild(hora))
     },
 
 
